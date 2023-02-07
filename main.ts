@@ -33,8 +33,7 @@ refVal = 0.4
 namespace CIPUV {
 init();
     /**
-        * Read Temperature in degrees celcius from the SHT2x sensor.
-        * Returns a number describing the UV radiation 
+        * Returns a number describing the UV radiation(UVI) 
     */
     //% blockId="VEML6070"
     //% block="Leer UV"
