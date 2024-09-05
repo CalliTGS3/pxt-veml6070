@@ -1,20 +1,18 @@
 //% weight=20 color=#0855AA icon="O" block="VEML6070"
 namespace VEML6070 {
 
-    let uvi = 0
-    let fnl = 0
     const VEML6070_ADDR_ARA = 12
     const VEML6070_ADDR_H = 57
     const VEML6070_ADDR_L = 56
     const MSB = 115
     const LSB = 113
-    const refVal = 0.4
+    const REFVAL = 0.4
     const INTEGRATION_TIME_1_T = 1
     const INTEGRATION_TIME_2_T = 2
     const INTEGRATION_TIME_4_T = 3
 
-    function getUVI(uv: number) {
-        uvi = refVal * (uv * 5.625) / 1000
+    function calcUVI(uv: number) {
+        let uvi = REFVAL * (uv * 5.625) / 1000
         uvi = uvi * 0.04
         return uvi
     }
@@ -26,20 +24,17 @@ namespace VEML6070 {
         return pins.i2cWriteBuffer(VEML6070_ADDR_L, buf)
     }
 
-    /**
-        * Init UV sensor 
-    */
     //% blockId="VEML6070_INIT" block="Initialisiere UV Sensor"
-    export function init() {
+    export function Init() {
         setReg(VEML6070_ADDR_ARA)
         basic.pause(10)
     }
-    
+
     /**
         * Returns a number describing the UV radiation(UVI) 
     */
     //% blockId="VEML6070_UVI" block="Ermittle UV Strahlung"
-    export function UVI(): number {
+    export function getUVI(): number {
         setReg(MSB);
         basic.pause(100);
         let i2cBuffer = pins.i2cReadBuffer(VEML6070_ADDR_L, pins.sizeOf(NumberFormat.UInt8LE) * 7, false);
@@ -51,7 +46,7 @@ namespace VEML6070 {
         let i2cBuff = pins.i2cReadBuffer(VEML6070_ADDR_L, pins.sizeOf(NumberFormat.UInt8LE) * 7, false);
         let res = i2cBuff[0] << 8;
         res |= i2cBuff[1];
-        fnl = getUVI(res + result);
+        let fnl = calcUVI(res + result);
         return fnl
     }
 }
