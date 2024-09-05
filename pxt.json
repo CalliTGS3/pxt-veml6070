@@ -1,11 +1,11 @@
 {
-    "name": "VEML6070",
+    "name": "pxt-veml6070",
     "description": "",
     "dependencies": {
         "core": "*"
     },
     "files": [
-        "main.ts",
+        "veml6070.ts",
         "README.md"
     ],
     "testFiles": [
