@@ -1,4 +1,4 @@
-//% weight=20 color=#0855AA icon="O" block="VEML6070"
+//% weight=20 color=#0855AA icon="\uf2c7" block="VEML6070"
 namespace VEML6070 {
 
     const VEML6070_ADDR_ARA = 12
